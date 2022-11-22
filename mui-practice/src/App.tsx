@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "./logo.svg";
-import "./App.css";
 import {
   Typography,
   AppBar,
@@ -12,6 +11,7 @@ import {
   Toolbar,
   Container,
   Button,
+  Card,
 } from "@material-ui/core";
 import { PhotoCamera } from "@material-ui/icons";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
@@ -27,10 +27,19 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: "40px",
   },
+  cardGrid: { padding: "20px" },
+  card: { height: "100%", display: "flex", flexDirection: "column" },
+  cardContent: {
+    flexGrow: 1,
+  },
+  cardMedia: {
+    paddingTop: "56.25%",
+  },
 }));
 
 export default function App() {
   const classes = useStyles();
+  const cards: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div>
       <CssBaseline />
@@ -78,6 +87,38 @@ export default function App() {
           </Container>
         </div>
       </main>
+      <Container className={classes.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {cards.map((card) => (
+            <Grid item sm={6}>
+              <Card className={classes.card}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image="https://source.unsplash.com/random"
+                  title="Image Title"
+                />
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5">
+                    Heading
+                  </Typography>
+                  <Typography>
+                    This is a media card. You can use this section to describe
+                    the content
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    View
+                  </Button>
+                  <Button size="small" color="primary">
+                    Edit
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </div>
   );
 }
